@@ -1,3 +1,4 @@
+import 'package:bmi/controller/bmicontroller.dart';
 import 'package:bmi/view/Bmi_buttons_ui.dart';
 import 'package:bmi/view/bmi_show_ui.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,10 @@ class Bmi_Ui1 extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var _weight = ref.watch(bmiProviderWeight);
+    var _height = ref.watch(bmiProviderheight);
+    var _switch = ref.watch(switching);
+    var _page = ref.watch(pagechanging);
     return Scaffold(
       backgroundColor: const Color(0xfff4f5f9),
       appBar: AppBar(
@@ -29,42 +34,50 @@ class Bmi_Ui1 extends ConsumerWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    border:
-                        Border.all(color: const Color(0xff94979c), width: 0.1),
-                    // color: const Color(0xfff4f5f7),
-                    gradient: const LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color(0xffe6e7e9),
-                        Color(0xfff4f5f7),
-                        Color(0xfff4f5f7),
+                InkWell(
+                  borderRadius: BorderRadius.circular(20),
+                  onTap: () {
+                    ref.read(switching.notifier).state = false;
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: const Color(0xff94979c), width: 0.1),
+                      // color: const Color(0xfff4f5f7),
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Color(0xffe6e7e9),
+                          Color(0xfff4f5f7),
+                          Color(0xfff4f5f7),
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        _switch == true
+                            ? BoxShadow(
+                                color: Colors.grey,
+                                offset: Offset(1, 2),
+                                blurRadius: 5)
+                            : BoxShadow(),
                       ],
                     ),
-                    borderRadius: BorderRadius.circular(20),
-                    // boxShadow: const [
-                    //   BoxShadow(
-                    //       color: Colors.grey,
-                    //       offset: Offset(1, 2),
-                    //       blurRadius: 5)
-                    // ],
-                  ),
-                  child: Text(
-                    "WEIGHT",
-                    style: GoogleFonts.inter(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        color: const Color(0xff94979c)),
+                    child: Text(
+                      "WEIGHT",
+                      style: GoogleFonts.inter(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                          color: const Color(0xff94979c)),
+                    ),
                   ),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      "75.00",
+                      _weight.length == 1 ? _weight : _weight.substring(1),
                       style: GoogleFonts.inter(
                           fontWeight: FontWeight.w700,
                           fontSize: 20,
@@ -87,49 +100,57 @@ class Bmi_Ui1 extends ConsumerWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    border:
-                        Border.all(color: const Color(0xff94979c), width: 0.1),
-                    // color: const Color(0xfff4f5f7),
-                    gradient: const LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color(0xffe6e7e9),
-                        Color(0xfff4f5f7),
-                        Color(0xfff4f5f7),
+                InkWell(
+                  borderRadius: BorderRadius.circular(20),
+                  onTap: () {
+                    ref.read(switching.notifier).state = true;
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: const Color(0xff94979c), width: 0.1),
+                      // color: const Color(0xfff4f5f7),
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Color(0xffe6e7e9),
+                          Color(0xfff4f5f7),
+                          Color(0xfff4f5f7),
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        _switch == false
+                            ? BoxShadow(
+                                color: Colors.grey,
+                                offset: Offset(1, 2),
+                                blurRadius: 5)
+                            : BoxShadow()
                       ],
                     ),
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Colors.grey,
-                          offset: Offset(1, 2),
-                          blurRadius: 5)
-                    ],
-                  ),
-                  child: Text(
-                    "HEIGHT",
-                    style: GoogleFonts.inter(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        color: const Color(0xff94979c)),
+                    child: Text(
+                      "HEIGHT",
+                      style: GoogleFonts.inter(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                          color: const Color(0xff94979c)),
+                    ),
                   ),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      "69.00",
+                      _height.length == 1 ? _height : _height.substring(1),
                       style: GoogleFonts.inter(
                           fontWeight: FontWeight.w700,
                           fontSize: 20,
                           color: const Color(0xff94979c)),
                     ),
                     Text(
-                      "INCHES",
+                      "CENTIMETER",
                       style: GoogleFonts.inter(
                           fontWeight: FontWeight.w600,
                           fontSize: 13,
@@ -147,8 +168,7 @@ class Bmi_Ui1 extends ConsumerWidget {
           const SizedBox(
             height: 30,
           ),
-          // Bmi_Show_ui(),
-          AllButtons_ui(),
+          _page ? Bmi_Show_ui() : AllButtons_ui(),
         ],
       ),
     );
