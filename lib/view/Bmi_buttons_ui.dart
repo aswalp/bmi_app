@@ -153,11 +153,15 @@ class AllButtons_ui extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(40),
                   onTap: () {
                     if (!_switch) {
-                      ref.read(bmiProviderWeight.notifier).state =
-                          removeLastLetter(_weight);
+                      if (_weight.length != 1) {
+                        ref.read(bmiProviderWeight.notifier).state =
+                            removeLastLetter(_weight);
+                      }
                     } else {
-                      ref.read(bmiProviderheight.notifier).state =
-                          removeLastLetter(_height);
+                      if (_height.length != 1) {
+                        ref.read(bmiProviderheight.notifier).state =
+                            removeLastLetter(_height);
+                      }
                     }
                   },
                   child: MainArrowbutton()),
@@ -170,7 +174,6 @@ class AllButtons_ui extends ConsumerWidget {
                         ((double.parse(_height) / 100) *
                             (double.parse(_height) / 100));
                     String s = _bmi.toStringAsFixed(2);
-                    print(_bmi);
 
                     ref.read(bmiProvidertotal.notifier).state = s;
                   },
