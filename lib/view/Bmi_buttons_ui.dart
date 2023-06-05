@@ -168,18 +168,20 @@ class AllButtons_ui extends ConsumerWidget {
               InkWell(
                   borderRadius: BorderRadius.circular(40),
                   onTap: () {
-                    ref.watch(pageController).animateToPage(
-                          1,
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeIn,
-                        );
+                    if (double.parse(_height) != 0) {
+                      ref.watch(pageController).animateToPage(
+                            1,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeIn,
+                          );
 
-                    _bmi = double.parse(_weight) /
-                        ((double.parse(_height) / 100) *
-                            (double.parse(_height) / 100));
-                    String s = _bmi.toStringAsFixed(2);
+                      _bmi = double.parse(_weight) /
+                          ((double.parse(_height) / 100) *
+                              (double.parse(_height) / 100));
+                      String s = _bmi.toStringAsFixed(2);
 
-                    ref.read(bmiProvidertotal.notifier).state = s;
+                      ref.read(bmiProvidertotal.notifier).state = s;
+                    }
                   },
                   child: MainButton(mainname: "GO")),
             ],
