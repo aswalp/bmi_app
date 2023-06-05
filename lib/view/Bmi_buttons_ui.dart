@@ -168,7 +168,11 @@ class AllButtons_ui extends ConsumerWidget {
               InkWell(
                   borderRadius: BorderRadius.circular(40),
                   onTap: () {
-                    ref.read(pagechanging.notifier).state = true;
+                    ref.watch(pageController).animateToPage(
+                          1,
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeIn,
+                        );
 
                     _bmi = double.parse(_weight) /
                         ((double.parse(_height) / 100) *

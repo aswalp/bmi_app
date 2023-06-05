@@ -109,7 +109,11 @@ class Bmi_Show_ui extends ConsumerWidget {
           InkWell(
             borderRadius: BorderRadius.circular(40),
             onTap: () {
-              ref.read(pagechanging.notifier).state = false;
+              ref.watch(pageController).animateToPage(
+                    0,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeIn,
+                  );
             },
             child: Container(
                 margin: const EdgeInsets.all(8),

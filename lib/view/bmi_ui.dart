@@ -6,14 +6,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Bmi_Ui1 extends ConsumerWidget {
-  const Bmi_Ui1({super.key});
+  Bmi_Ui1({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var _weight = ref.watch(bmiProviderWeight);
     var _height = ref.watch(bmiProviderheight);
     var _switch = ref.watch(switching);
-    var _page = ref.watch(pagechanging);
     return Scaffold(
       backgroundColor: const Color(0xfff4f5f9),
       appBar: AppBar(
@@ -168,7 +167,16 @@ class Bmi_Ui1 extends ConsumerWidget {
           const SizedBox(
             height: 30,
           ),
-          _page ? Bmi_Show_ui() : AllButtons_ui(),
+
+          Expanded(
+            child: PageView(
+              controller: ref.watch(pageController),
+              physics: const NeverScrollableScrollPhysics(),
+              pageSnapping: true,
+              children: [AllButtons_ui(), Bmi_Show_ui()],
+            ),
+          ),
+          // _page ? Bmi_Show_ui() : AllButtons_ui(),
         ],
       ),
     );
