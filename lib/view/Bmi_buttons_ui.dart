@@ -17,6 +17,7 @@ class AllButtons_ui extends ConsumerWidget {
     return Padding(
       padding: EdgeInsets.all(20.0),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Column(
