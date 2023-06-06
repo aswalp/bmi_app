@@ -22,8 +22,9 @@ class Bmi_Ui1 extends ConsumerWidget {
         title: Text(
           "BMI",
           style: GoogleFonts.inter(
-            fontSize: 16,
-          ),
+              fontSize: 26,
+              fontWeight: FontWeight.w700,
+              color: const Color(0xfff4953e)),
         ),
       ),
       body: Column(
